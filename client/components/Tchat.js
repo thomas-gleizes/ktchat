@@ -33,7 +33,7 @@ const Tchat = () => {
   useEffect(() => {
     if (socket)
       socket.on("join", (msg) => {
-        console.log("join", msg);
+        console.log("> join", msg);
         addMessage(msg);
       });
   }, [socket]);
@@ -45,6 +45,8 @@ const Tchat = () => {
       setQuery("");
     }
   };
+
+  useEffect(() => console.log("Messages", messages), [messages]);
 
   return (
     <div className="bg-gray-100 shadow border max-w-600  w-full px-2 pt-2 rounded">

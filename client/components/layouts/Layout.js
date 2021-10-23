@@ -1,9 +1,9 @@
+import React from "react";
 import Head from "next/head";
-import Tchat from "../components/Tchat";
 
-const Home = () => {
+const Layout = ({ children, ...props }) => {
   return (
-    <div>
+    <>
       <Head>
         <title>Socket.io tchat</title>
       </Head>
@@ -14,12 +14,9 @@ const Home = () => {
           </h1>
         </div>
       </header>
-
-      <main className="p-5 flex justify-around">
-        <Tchat />
-      </main>
-    </div>
+      <main {...props}>{children}</main>
+    </>
   );
 };
 
-export default Home;
+export default Layout;

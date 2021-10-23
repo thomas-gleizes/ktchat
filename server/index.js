@@ -2,6 +2,7 @@ const express = require("express");
 const socketio = require("socket.io");
 const http = require("http");
 const cors = require("cors");
+const Moment = require("moment");
 
 const app = express();
 const server = http.createServer(app);
@@ -11,18 +12,21 @@ const io = socketio(server, {
   },
 });
 
+const log = (...str) =>
+  console.log(`${Moment().format("YYYY-MM-DD HH:mm:ss")} >`, ...str);
+
 app.use(cors());
 
 io.on("connection", (socket) => {
-  console.log("client connected");
+  log("client connected");
 
   socket.on("join", (content) => {
-    console.log("join", content);
+    log("join", content);
     socket.broadcast.emit("join", content);
   });
 
   socket.on("disconnect", () => {
-    console.log("client left");
+    log("connected left");
   });
 });
 
